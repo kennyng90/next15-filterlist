@@ -22,7 +22,7 @@ export default async function TabPage({ params, searchParams }: PageProps) {
 
   try {
     taskStatusSchema.parse(tab);
-  } catch (e) {
+  } catch {
     notFound();
   }
 
