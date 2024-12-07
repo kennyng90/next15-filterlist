@@ -12,10 +12,10 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 ## Getting Started
 
-First, force install the dependencies to make the React 19 Beta work:
+First, install the dependencies:
 
 ```bash
-npm install --force
+npm install
 ```
 
 Then, run the development server:
