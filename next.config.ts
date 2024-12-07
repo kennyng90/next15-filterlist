@@ -2,7 +2,7 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   experimental: {
-    inlineCss: true,
+    // optimizeCss: true,
     ppr: true,
     reactCompiler: true,
     staleTimes: {
