@@ -1,7 +1,6 @@
 import './globals.css';
 
-// eslint-disable-next-line import/no-unresolved
-import { GeistSans } from 'geist/font/sans';
+import { Geist } from 'next/font/google';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { Suspense } from 'react';
 import CategoryFilter, { CategoryFilterSkeleton } from '@/components/CategoryFilter';
@@ -13,6 +12,8 @@ import { getCategoriesMap } from '@/data/services/category';
 import { getTaskSummary } from '@/data/services/task';
 import { cn } from '@/utils/cn';
 import type { Metadata } from 'next';
+
+const GeistSans = Geist({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   description: 'Next.js 15 filtering list example using modern React features',
