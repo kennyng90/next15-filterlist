@@ -1,6 +1,8 @@
 import './globals.css';
 
 import { Geist } from 'next/font/google';
+import { Suspense } from 'react';
+import CategoryFilter, { CategoryFilterSkeleton } from '@/components/CategoryFilter';
 import LoadTime from '@/components/LoadTime';
 import ProjectInfo from '@/components/ProjectInfo';
 import Search, { SearchSkeleton } from '@/components/Search';
