@@ -70,13 +70,14 @@ Let's continue to improve the UX, it is still not good here.
 
 - Uncomfortable experience in the search when using the default form submit, which is a GET pushing the values of the inputs inside the form to the URL. Full page and cant see active search.
 - Progressive enhancement of the base case search. Let's first use the new Nextjs 15 form component to make this a client side navigation when js is loaded: import, use form and add action, current route with empty string.
-- We can also is to add an onChange handler, we want to push to the router. Add router, params, and searchParams.
+- As a user, we want to know that something is happening in the app.
+- Since this is a form, we can head over to the Search.tsx and useFormStatus to get the submitting status. Enable the spinner.
+- We can also consider adding an onChange handler, we want to push to the router. Add router, params, and searchParams.
 - Onchange newSearchParams. We gonna use the existing search params because we will keeping the state in the URL as a single source of truth, because the state of the app will be reloadable, shareable, and bookmarkable.
 - Add defaultvalue.
 - Add activetab to reset with a key.
 - Add "use client".
 - Notice the url is updating later because we are waiting for the await in the table to resolve before routing.
-- As a user, we want to know that something is happening in the app.
 - Explain useTransition: mark a state update as non-urgent and non-blocking and get pending state.
 - Use pending state to display user while waiting for the navigation to finish, which is the await in the table component. Reload.
 - Enable the spinner, while we are transitioning, we can see it.
@@ -142,6 +143,14 @@ Let's continue to improve the UX, it is still not good here.
 - Maintained 0 CLS because of these skeletons being sized correctly.
 - We have greatly improved performance, getting 99 score in lighthouse even with a 2.3s second total load time application.
 - We managed to complete our task of improving the bad metrics and maintaining the good ones, while also making app fast, interactive and user-friendly.
+
+## (Note on nuqs)
+
+- Demo clicking two params quickly, and show that the first update is discarded. This is because the updates are in seperate transitions. We would have to refactor this a little bit to make it work properly.
+- We can use a library like nuqs to achieve the same search param filtering, with less code and no bugs!
+- Switch branch to nuqs.
+- Using the same transition implementation, and using shallow:false to make the search param trigger a pagereload. And its also type-safe!
+- The way nuqs is implemented, it actually manipulates the URL instantly.
 
 ## (Conclusion)
 
