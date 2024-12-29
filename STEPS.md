@@ -144,6 +144,14 @@ Let's continue to improve the UX, it is still not good here.
 - We have greatly improved performance, getting 99 score in lighthouse even with a 2.3s second total load time application.
 - We managed to complete our task of improving the bad metrics and maintaining the good ones, while also making app fast, interactive and user-friendly.
 
+## (Note on nuqs)
+
+- Demo clicking two params quickly, and show that the first update is discarded. This is because the updates are in seperate transitions. We would have to refactor this a little bit to make it work properly.
+- We can use a library like nuqs to achieve the same search param filtering, with less code and no bugs!
+- Switch branch to nuqs.
+- Using the same transition implementation, and using shallow:false to make the search param trigger a pagereload. And its also type-safe!
+- The way nuqs is implemented, it actually manipulates the URL instantly.
+
 ## (Conclusion)
 
 That's it for this talk, the code is pinned on my github, and follow me on twitter if you are interested in more RSC content. Thanks for listening!
