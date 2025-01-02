@@ -1,11 +1,13 @@
 import './globals.css';
 
 import { Geist } from 'next/font/google';
+import { Suspense } from 'react';
+import CategoryFilter, { CategoryFilterSkeleton } from '@/components/CategoryFilter';
 import LoadTime from '@/components/LoadTime';
 import ProjectInfo from '@/components/ProjectInfo';
-import Search from '@/components/Search';
-import StatusTabs from '@/components/StatusTabs';
-import { getProject } from '@/data/services/project';
+import Search, { SearchSkeleton } from '@/components/Search';
+import StatusTabs, { StatusTabsSkeleton } from '@/components/StatusTabs';
+import { getCategoriesMap } from '@/data/services/category';
 import { getTaskSummary } from '@/data/services/task';
 import { cn } from '@/utils/cn';
 import type { Metadata } from 'next';
@@ -18,8 +20,8 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const project = await getProject();
-  const taskSummary = await getTaskSummary();
+  const taskSummary = getTaskSummary();
+  const categories = getCategoriesMap();
 
   return (
     <html lang="en">
@@ -27,14 +29,21 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <div className="group flex flex-col gap-10">
           <div className="flex flex-col gap-6">
             <h1>Project information</h1>
-            <ProjectInfo project={project} />
+            <ProjectInfo />
           </div>
           <div className="flex flex-col gap-6">
             <h2>Task list</h2>
-            <StatusTabs taskSummary={taskSummary} />
+            <Suspense fallback={<StatusTabsSkeleton />}>
+              <StatusTabs taskSummaryPromise={taskSummary} />
+            </Suspense>
           </div>
           <div className="h-[1px] bg-primary" />
-          <Search />
+          <Suspense fallback={<SearchSkeleton />}>
+            <Search />
+          </Suspense>
+          <Suspense fallback={<CategoryFilterSkeleton />}>
+            <CategoryFilter categoriesPromise={categories} />
+          </Suspense>
           {children}
         </div>
         <LoadTime />

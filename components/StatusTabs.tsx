@@ -1,17 +1,21 @@
-import React from 'react';
+'use client';
+import React, { use } from 'react';
 import type { TaskStatus, TaskSummary } from '@/types/task';
 import { cn } from '@/utils/cn';
 import { getCategoryColor } from '@/utils/getCategoryColor';
 import Skeleton from './ui/Skeleton';
 import NavTab from './ui/nav-tabs/NavTab';
 import NavTabs from './ui/nav-tabs/NavTabs';
+import { useParams } from 'next/navigation';
 
 type Props = {
-  taskSummary: TaskSummary;
+  taskSummaryPromise: Promise<TaskSummary>;
 };
 
-export default async function StatusTabs({ taskSummary }: Props) {
-  const activeTab = '' as TaskStatus;
+export default function StatusTabs({ taskSummaryPromise }: Props) {
+  const taskSummary = use(taskSummaryPromise);
+  const params = useParams();
+  const activeTab = params.tab as TaskStatus;
 
   const mapTasks = (status: TaskStatus) => {
     return (

@@ -1,6 +1,6 @@
 import React from 'react';
+import { getProject } from '@/data/services/project';
 import Skeleton from './ui/Skeleton';
-import type { Project, TeamMember } from '@prisma/client';
 
 function Chip({ children }: { children: React.ReactNode }) {
   return (
@@ -17,13 +17,9 @@ function Info({ label, value }: { label: string; value: string }) {
   );
 }
 
-type Props = {
-  project: Project & {
-    teamMembers: Record<string, { count: number; members: TeamMember[] }>;
-  };
-};
+export default async function ProjectInfo() {
+  const project = await getProject();
 
-export default async function ProjectInfo({ project }: Props) {
   return (
     <div className="flex gap-16">
       <div className="flex flex-col gap-2">
